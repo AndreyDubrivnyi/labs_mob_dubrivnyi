@@ -39,7 +39,7 @@ class _MyLab3PageState extends State<MyLab3> {
   final TextEditingController _stepController = TextEditingController();
   String _fileContent = '';
   double calculateFunction(double x) {
-    return cos(x); // Пример функции
+    return cos(x);
   }
 
   Future<String> get _localPath async {
