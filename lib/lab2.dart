@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:labs_mob_dubrivnyi/provider/ResultModel.dart';
+import 'package:provider/provider.dart';
 
 class Lab2 extends StatelessWidget {
   const Lab2({super.key});
@@ -56,6 +58,7 @@ class _MyLab2PageState extends State<MyLab2> {
       double y = double.parse(_yController.text);
       double a = double.parse(_aController.text);
       double result = calculateD(x, y, a);
+      Provider.of<ResultModel>(context, listen: false).setResult(result.toDouble());
       setState(() {
         _answer = "Answer is: $result";
       });

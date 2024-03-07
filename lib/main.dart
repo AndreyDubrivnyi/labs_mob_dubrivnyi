@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:labs_mob_dubrivnyi/provider/ResultModel.dart';
 
 import 'lab1.dart';
 import 'lab2.dart';
+import 'lab3.dart';
 
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: (context) => ResultModel(),
+    child: MyApp(),
+  ),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,6 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Lab2()),
+    );
+  }
+  void openLab3(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab3()),
     );
   }
 
@@ -101,7 +113,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                openLab3(context);
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                ),
+              ),
+              child: const Text(
+                "Lab work 3",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ],
         ),
       ),
