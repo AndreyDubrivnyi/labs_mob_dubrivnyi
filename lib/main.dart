@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'lab1.dart';
+import 'lab2.dart';
+
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'All labs'),
     );
   }
 }
@@ -30,12 +34,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _infoVisible = false;
-
-  void giveInfo() {
-    setState(() {
-      _infoVisible = true;
-    });
+  void openLab1() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab1()),
+    );
+  }
+  void openLab2(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab2()),
+    );
   }
 
   @override
@@ -49,63 +58,47 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Прізвище, ім'я та по батькові:\n Andriy Dubrivnyi \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold, // Установка полужирного шрифта
+            ElevatedButton(
+              onPressed: openLab1,
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-              ), // Первая строка
-            ),
-            Visibility(
-              visible: _infoVisible,
+
+              ),
               child: const Text(
-                "Назва спеціальності, на якій навчаєтесь:\nComputer Science \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold, // Установка полужирного шрифта
-                ),
-              ), // Вторая строка
-            ),
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Номер курсу і групи:\n 4 years, KH 20001Б \n ",
+                "Lab work 1",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  // Установка полужирного шрифта
-                ),
-              ),
-            ),
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Чого хотіли би досягти в кінці цього \n навчального курсу:\nI want to improve my Flutter skills \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold, // Установка полужирного шрифта
                 ),
               ),
             ),
             ElevatedButton(
-              onPressed: giveInfo,
+              onPressed: () {
+                openLab2(context);
+              },
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(200, 70)),
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                ),
               ),
               child: const Text(
-                "Click for info",
+                "Lab work 2",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.bold, // Установка полужирного шрифта
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             )
