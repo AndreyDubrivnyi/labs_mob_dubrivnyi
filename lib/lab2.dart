@@ -28,6 +28,7 @@ class MyLab2 extends StatefulWidget {
 
 class _MyLab2PageState extends State<MyLab2> {
   bool _infoVisible = false;
+  bool _answerVisible = false;
   bool _isButtonVisible = true;
   String _answer = "";
 
@@ -36,11 +37,11 @@ class _MyLab2PageState extends State<MyLab2> {
   final TextEditingController _aController = TextEditingController();
 
   void outputResponse() {
-    if(getAnswer()) {
+    getAnswer();
       setState(() {
-        _infoVisible = true;
+        _answerVisible = true;
       });
-    }
+
   }
   void getInfo(){
     setState(() {
@@ -129,7 +130,7 @@ class _MyLab2PageState extends State<MyLab2> {
             ),
             const SizedBox(height: 10),
             Visibility(
-              visible: _infoVisible,
+              visible: _answerVisible,
               child: Text(
                 _answer,
                 textAlign: TextAlign.center,
