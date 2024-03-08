@@ -5,6 +5,7 @@ import 'package:labs_mob_dubrivnyi/provider/ResultModel.dart';
 import 'lab1.dart';
 import 'lab2.dart';
 import 'lab3.dart';
+import 'lab4.dart';
 
 
 void main() => runApp(
@@ -56,6 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Lab3()),
+    );
+  }
+  void openLab4(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab4()),
     );
   }
 
@@ -130,6 +137,29 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text(
                 "Lab work 3",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                openLab4(context);
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                ),
+              ),
+              child: const Text(
+                "Lab work 4",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,

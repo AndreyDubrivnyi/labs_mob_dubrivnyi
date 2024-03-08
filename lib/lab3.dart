@@ -4,8 +4,6 @@ import 'package:labs_mob_dubrivnyi/provider/ResultModel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
 
 
 class Lab3 extends StatelessWidget {
@@ -34,7 +32,6 @@ class MyLab3 extends StatefulWidget {
 }
 
 class _MyLab3PageState extends State<MyLab3> {
-  final TextEditingController _startController = TextEditingController();
   final TextEditingController _endController = TextEditingController();
   final TextEditingController _stepController = TextEditingController();
   String _fileContent = '';
@@ -56,7 +53,7 @@ class _MyLab3PageState extends State<MyLab3> {
     StringBuffer sb = StringBuffer();
     for (double x = start; x <= end; x += step) {
       double value = calculateFunction(x);
-      sb.writeln('x: $x, f(x): $value');
+      sb.writeln('$x, $value');
     }
     return file.writeAsString(sb.toString());
   }
