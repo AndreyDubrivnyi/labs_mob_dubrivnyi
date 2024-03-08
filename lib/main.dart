@@ -6,6 +6,8 @@ import 'lab1.dart';
 import 'lab2.dart';
 import 'lab3.dart';
 import 'lab4.dart';
+import 'lab5.dart';
+import 'lab6.dart';
 
 
 void main() => runApp(
@@ -63,6 +65,18 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Lab4()),
+    );
+  }
+  void openLab5(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab5()),
+    );
+  }
+  void openLab6(BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Lab6()),
     );
   }
 
@@ -160,6 +174,52 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text(
                 "Lab work 4",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                openLab5(context);
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                ),
+              ),
+              child: const Text(
+                "Lab work 5",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                openLab5(context);
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(100, 40)),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                ),
+              ),
+              child: const Text(
+                "Independent work",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
