@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                openLab5(context);
+                openLab6(context);
               },
               style: ButtonStyle(
                 minimumSize: MaterialStateProperty.all(const Size(100, 40)),

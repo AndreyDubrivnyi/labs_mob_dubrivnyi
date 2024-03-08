@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class Lab6 extends StatelessWidget {
   const Lab6({super.key});
@@ -21,19 +22,96 @@ class MyLab6 extends StatefulWidget {
   final String title;
 
   @override
-  State<MyLab6> createState() => _MyLab1PageState();
+  State<MyLab6> createState() => _MyLab6PageState();
 }
 
-class _MyLab1PageState extends State<MyLab6> {
-  bool _infoVisible = false;
-  bool _isButtonVisible = true;
+class _MyLab6PageState extends State<MyLab6> {
+  List<int> _numbers = [];
+  String _sortedNumbers = '';
 
-  void giveInfo() {
-    setState(() {
-      _infoVisible = true;
-      _isButtonVisible = false;
-    });
+  void _generateArray() {
+    final random = math.Random();
+    _numbers = List.generate(10, (_) => random.nextInt(100));
+    _sortedNumbers = _numbers.join(', ');
   }
+
+  void _bubbleSort() {
+    List<int> nums = List.from(_numbers);
+    for (int i = 0; i < nums.length - 1; i++) {
+      for (int j = 0; j < nums.length - i - 1; j++) {
+        if (nums[j] > nums[j + 1]) {
+          int temp = nums[j];
+          nums[j] = nums[j + 1];
+          nums[j + 1] = temp;
+        }
+      }
+    }
+    _sortedNumbers = nums.join(', ');
+  }
+
+  void _selectionSort() {
+    List<int> nums = List.from(_numbers);
+    for (int i = 0; i < nums.length; i++) {
+      int minIndex = i;
+      for (int j = i + 1; j < nums.length; j++) {
+        if (nums[j] < nums[minIndex]) {
+          minIndex = j;
+        }
+      }
+      if (minIndex != i) {
+        int temp = nums[i];
+        nums[i] = nums[minIndex];
+        nums[minIndex] = temp;
+      }
+    }
+    _sortedNumbers = nums.join(', ');
+  }
+
+  void _insertionSort() {
+    List<int> nums = List.from(_numbers);
+    for (int i = 1; i < nums.length; i++) {
+      int key = nums[i];
+      int j = i - 1;
+      while (j >= 0 && nums[j] > key) {
+        nums[j + 1] = nums[j];
+        j = j - 1;
+      }
+      nums[j + 1] = key;
+    }
+    _sortedNumbers = nums.join(', ');
+  }
+
+  void _quickSort(List<int> nums, int low, int high) {
+    if (low < high) {
+      int pivotIndex = _partition(nums, low, high);
+      _quickSort(nums, low, pivotIndex - 1);
+      _quickSort(nums, pivotIndex + 1, high);
+    }
+  }
+
+  int _partition(List<int> nums, int low, int high) {
+    int pivot = nums[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+      if (nums[j] < pivot) {
+        i++;
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+      }
+    }
+    int temp = nums[i + 1];
+    nums[i + 1] = nums[high];
+    nums[high] = temp;
+    return i + 1;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _generateArray();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,74 +123,49 @@ class _MyLab1PageState extends State<MyLab6> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Прізвище, ім'я та по батькові:\n Andriy Dubrivnyi \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ), // Первая строка
+            Text('Numbers: $_sortedNumbers'),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _generateArray();
+                });
+              },
+              child: Text('Generate Array'),
             ),
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Назва спеціальності, на якій навчаєтесь:\nComputer Science \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ), // Вторая строка
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _bubbleSort();
+                });
+              },
+              child: Text('Bubble Sort'),
             ),
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Номер курсу і групи:\n 4 years, KH 20001Б \n ",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _selectionSort();
+                });
+              },
+              child: Text('Selection Sort'),
             ),
-            Visibility(
-              visible: _infoVisible,
-              child: const Text(
-                "Чого хотіли би досягти в кінці цього \n навчального курсу:\nI want to improve my Flutter skills \n",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _insertionSort();
+                });
+              },
+              child: Text('Insertion Sort'),
             ),
-            Visibility(
-              visible: _isButtonVisible,
-              child: ElevatedButton(
-                onPressed: giveInfo,
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(const Size(200, 70)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  "Click for info",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  List<int> nums = List.from(_numbers);
+                  _quickSort(nums, 0, nums.length - 1);
+                  _sortedNumbers = nums.join(', ');
+                });
+              },
+              child: Text('Quick Sort'),
             ),
-
           ],
         ),
       ),
