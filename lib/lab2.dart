@@ -217,7 +217,6 @@ class _MyLab2PageState extends State<MyLab2> {
   }
   @override
   void dispose() {
-    // Очистка контроллеров при уничтожении виджета
     _xController.dispose();
     _yController.dispose();
     _aController.dispose();
